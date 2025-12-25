@@ -3,7 +3,11 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                if (isUnix()) {
+                    sh 'mvn -B -DskipTests clean package'
+                } else {
+                    bat 'mvn -B -DskipTests clean package'
+                }
             }
         }
     }
